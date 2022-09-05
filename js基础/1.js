@@ -129,3 +129,6 @@
 // console.log(o.name, alvin.name) // ali， alvin
 // console.log(o.__proto__ === alvin.__proto__) // true
 // console.log(o.constructor === Person, alvin.constructor === Person) // true true
+const aa = Symbol.for('aaa')
+const bb = Symbol.for('aaa')
+console.log(aa === bb)

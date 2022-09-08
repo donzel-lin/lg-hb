@@ -376,26 +376,258 @@ let count = 0
 
 
 
-console.log(1)
-setTimeout(() => {
-    console.log(2)
-}, 10000)
-
-new Promise((resolve, reject) => {
-    console.log(3)
-    setTimeout(() => {
-        console.log(4)
-        resolve(5)
-    },0)
-    resolve()
-}).then(() => {
-    console.log(6)
-    setTimeout(() => {
-        console.log(7)
-    }, 200)
-})
-
-console.log(8)
+// console.log(1)
+// setTimeout(() => {
+//     console.log(2)
+// }, 10000)
+//
+// new Promise((resolve, reject) => {
+//     console.log(3)
+//     setTimeout(() => {
+//         console.log(4)
+//         resolve(5)
+//     },0)
+//     resolve()
+// }).then(() => {
+//     console.log(6)
+//     setTimeout(() => {
+//         console.log(7)
+//     }, 200)
+// })
+//
+// console.log(8)
 
 // 1,3,8,4,6,7,2
 // 1,3,8,6,4,7,2
+
+// console.log('script start');
+//
+// setTimeout(function() {
+//     console.log('timeout1');
+// }, 10);
+//
+// new Promise(resolve => {
+//     console.log('promise1');
+//     resolve();
+//     setTimeout(() => console.log('timeout2'), 10);
+// }).then(function() {
+//     console.log('then1')
+// })
+//
+// console.log('script end');
+
+
+function task1() {
+    console.log('task1')
+    setTimeout(() => {
+        console.log('task1-1')
+    }, 0)
+    new Promise((resolve) => {
+        console.log('task1-2')
+        resolve()
+    }).then(() => {
+        console.log('task1-3')
+    })
+    console.log('task1-end')
+}
+
+function task2() {
+    console.log('task2')
+    setTimeout(() => {
+        console.log('task2-1')
+    }, 1000)
+    new Promise((resolve) => {
+        console.log('task2-2')
+        resolve()
+
+    }).then(() => {
+        console.log('task2-3')
+        new Promise((resolve) => {
+            console.log('new-micro-task2-3-1')
+            resolve()
+        }).then(() => {
+            console.log('1111111111111111')
+        })
+    })
+    console.log('task2-end')
+}
+
+// console.log('start')
+// task1()
+// console.log('task2')
+// task2()
+// console.log('task3')
+
+
+// Function.prototype.myCall = function(context, ...args) {// 剩余参数是 列表参数，非数组
+//     const ctx = context || window
+//     let func = this // this是调用的函数
+//     ctx.fn = func
+//     console.log(args, 'args')
+//     let res = ctx.fn(...args) // 立即执行，保存结果
+//     delete ctx.fn
+//     return res
+// }
+// Function.prototype.myApply = function(context, args) {// args数组， 剩余参数是一个数组
+//     const ctx = context || window
+//     let func = this
+//     ctx.fn = func
+//     let res
+//     if(!args) {
+//         res = ctx.fn()
+//     } else {
+//         res = ctx.fn(...args) // apply会将传入的数组，当做 列表参数传递给 函数
+//     }
+//     delete ctx.fn
+//     return res
+// }
+// //实现bind方法
+// Function.prototype.myBind = function(oThis) {
+//     if (typeof this !== 'function') {
+//         // closest thing possible to the ECMAScript 5
+//         // internal IsCallable function
+//         throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+//     }
+//     var aArgs = Array.prototype.slice.call(arguments, 1),
+//         fToBind = this,
+//         fNOP = function() {},
+//         fBound = function() {
+//             // this instanceof fBound === true时,说明返回的fBound被当做new的构造函数调用
+//             return fToBind.apply(this instanceof fBound
+//                 ? this
+//                 : oThis,
+//                 // 获取调用时(fBound)的传参.bind 返回的函数入参往往是这么传递的
+//                 aArgs.concat(Array.prototype.slice.call(arguments)));
+//         };
+//     // 维护原型关系
+//     if (this.prototype) {
+//         // 当执行Function.prototype.bind()时, this为Function.prototype
+//         // this.prototype(即Function.prototype.prototype)为undefined
+//         fNOP.prototype = this.prototype;
+//     }
+//     // 下行的代码使fBound.prototype是fNOP的实例,因此
+//     // 返回的fBound若作为new的构造函数,new生成的新对象作为this传入fBound,新对象的__proto__就是fNOP的实例
+//     fBound.prototype = new fNOP();
+//     return fBound;
+// };
+// // var arr=[1,11,5,8,12];
+// // var max=Math.max.bind(null,arr[0],arr[1],arr[2],arr[3]);
+// // console.log(max(arr[4])); //12
+// const arr = [1,11,5,8,12]
+// console.log(Math.max.myApply(null, arr))
+// console.log(Math.max.myCall(null, ...arr))
+//
+//
+// var a = 0
+// var b = 1 + (a++)
+// // var b = 1 + ++a
+// console.log(a, b)
+
+
+
+// 柯里化
+// function curry(targetfn) {
+//     var numOfArgs = targetfn.length // 获取参数个数
+//     console.log(targetfn, 'targetfn')
+//     return function fn(...rest) {//rest参数
+//         console.log(rest, 'rest')
+//         if (rest.length < numOfArgs) {
+//             return fn.bind(null, ...rest);
+//         } else {
+//             return targetfn.apply(null, rest);
+//         }
+//     };
+// }
+// 加法函数
+function add(a, b, c, d) {
+    return a + b + c + d;
+}
+// 将一个多参数函数转化为多个嵌套的单参数函数
+console.log("柯里化：", curry(add)(1)(2)(3)(4));
+console.log("柯里化：", curry(add)(11,2,3)(4, 5));
+// 柯里化：10
+
+// compose
+
+function addOne(a) {
+    return ++a
+}
+function multiple(a) {
+    return a * a
+}
+function times(a) {
+    return 2 * a
+}
+// function compose(f, g) {// 函数从右向左执行
+//     return function fn(a) {
+//         return f(g(a))
+//     }
+// }
+// const addAndMultiple = compose(addOne, multiple)
+// console.log(addAndMultiple(10)) // 101
+
+
+function compose(...fns) {
+    const fnNumber = fns.length
+    let fnIndex = fnNumber -1
+    return function fn(...args) { // 参数列表
+        const startFn = fns[fnIndex] // 右边第一个函数
+        const result = startFn(...args)
+        while (fnIndex > 0) {
+            fnIndex--
+            return fn(result)
+        }
+        return result
+    }
+}
+const addAndMultiple = compose(times, addOne, multiple)
+console.log(addAndMultiple(10)) // 101
+
+
+function curry(targetFn) {
+    const paramsNum = targetFn.length // 如果fn是函数，那么fn.length返回所需参数的个数
+    return function fn(...args) {
+        // args接受参数列表
+        if(args.length < paramsNum) {
+            // 参数未接收完毕
+            // return function (...arguments) {
+            //     const arg = [].concat(args, arguments)
+            //     return fn(...arg)
+            // }
+            return fn.bind(null, ...args) // bind会返回一个新的函数，只是不会执行，参数是参数列表
+        } else {
+            // 参数够了
+            return targetFn(...args)
+        }
+    }
+}
+
+
+// reduec
+// 接受一个函数作为参数，返回一个
+Array.prototype.myReduce = function(fn, res) {
+    // fn为函数参数， res为返回值
+    // return fn
+    // this为当前数组
+    const arr = this
+    for(let i =0;i<arr.length;i++) {
+        res = fn(res, arr[i], i, arr)
+    }
+    return res
+}
+const arr = [1,3,4,10]
+const sum = arr.myReduce((sum,item, index) => {
+    sum += item
+    return sum
+}, 0)
+console.log(sum, 'sum')
+
+Array.prototype.myForEach = function(fn) {
+    const arr = this
+    for(let i =0;i<arr.length;i++) {
+        fn(arr[i], i)
+    }
+}
+arr.myForEach((item, index) => {
+    console.log(item, index, '22222222222222')
+})

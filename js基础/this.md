@@ -164,3 +164,89 @@ foo.call(obj) // 2
 ##### 箭头函数
 
 - **箭头函数不适应上面的四条绑定规则，而是根据当前的词法作用域来决定 this，具体来说，箭头函数会继承外层函数调用的 this 绑定（无论 this 绑定到什么）**
+
+#### call、apply和bind修改this指向
+
+##### 相同点
+
+- 将函数内部this修改指向为第一个参数
+- 都可传参
+
+###### **不同点**
+
+- call,apply会立即执行;bind会返回一个函数，不会马上执行
+- call,bind剩余参数是数组形式；apply是列表参数的形式
+- call,apply只是临时修改this,bind是永久修改
+
+```javascript
+// CALL
+Function.prototype.myCall = function(context, ...args) {// 剩余参数是 列表参数，非数组
+    const ctx = context || window
+    let func = this // this是调用的函数
+    ctx.fn = func
+    console.log(args, 'args')
+    let res = ctx.fn(...args) // 立即执行，保存结果
+    delete ctx.fn
+    return res
+}
+
+```
+
+- apply
+
+```javascript
+Function.prototype.myApply = function(context, args) {// args数组， 剩余参数是一个数组
+    const ctx = context || window
+    let func = this
+    ctx.fn = func
+    let res
+    if(!args) {
+        res = ctx.fn()
+    } else {
+        res = ctx.fn(...args) // apply会将传入的数组，当做 列表参数传递给 函数
+    }
+    delete ctx.fn
+    return res
+}
+```
+
+- bind
+
+```javascript
+Function.prototype.myBind = function(oThis) {
+    if (typeof this !== 'function') {
+        // closest thing possible to the ECMAScript 5
+        // internal IsCallable function
+        throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+    }
+    // 所有参数
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+        fToBind = this,
+        fNOP = function() {},
+        fBound = function() {
+            // this instanceof fBound === true时,说明返回的fBound被当做new的构造函数调用
+            return fToBind.apply(this instanceof fBound
+                ? this
+                : oThis,
+                // 获取调用时(fBound)的传参.bind 返回的函数入参往往是这么传递的
+                aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+    // 维护原型关系
+    if (this.prototype) {
+        // 当执行Function.prototype.bind()时, this为Function.prototype
+        // this.prototype(即Function.prototype.prototype)为undefined
+        fNOP.prototype = this.prototype;
+    }
+    // 下行的代码使fBound.prototype是fNOP的实例,因此
+    // 返回的fBound若作为new的构造函数,new生成的新对象作为this传入fBound,新对象的__proto__就是fNOP的实例
+    fBound.prototype = new fNOP();
+    return fBound;
+};
+```
+
+```javascript
+const arr = [1,11,5,8,12]
+console.log(Math.max.myApply(null, arr))
+console.log(Math.max.myCall(null, ...arr))
+```
+

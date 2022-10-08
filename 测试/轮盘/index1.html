@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .round{
+            position: relative;
+            width: 450px;
+            height: 450px;
+        }
+        .btn{
+            position:absolute;
+            top:50%;
+            left: 50%;
+            margin-top: -138px;
+            margin-left: -94px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="round">
+    <div class="box">
+        <img src="./imgs/turntable.png" alt="">
+    </div>
+    <div class="btn">
+        <img src="./imgs/pointer.png" alt="">
+    </div>
+</div>
+<script>
+    var round=document.getElementsByClassName("round")[0];
+    var box=round.getElementsByClassName("box")[0].children[0];
+    var btn=round.getElementsByClassName("btn")[0];
+    btn.onclick=function(){
+        var deg=Math.floor(Math.random()*360);
+        var num=8;
+        var rotateDeg=num*360+deg;
+        box.style.transform="rotate("+rotateDeg+"deg)";
+        box.style.transition="5s";
+        setTimeout("res("+deg+")",5000)
+    }
+    function res(deg){
+        if(deg>=0&&deg<=51){
+            alert("免单4999");
+        }else if(deg>51&&deg<=102){
+            alert("免单50")
+        }else if(deg>102&&deg<=153){
+            alert("免单10")
+        }else if(deg>153&&deg<=204){
+            alert("免单5")
+        }else if(deg>204&&deg<=255){
+            alert("免分期")
+        }else if(deg>255&&deg<=306){
+            alert("提额度")
+        }else{
+            alert("未中奖")
+        }
+        box.dataset.rotate=deg;
+        box.style.transform="rotate("+deg+"deg)";
+        box.style.transition="";
+    }
+
+</script>
+</body>
+</html>

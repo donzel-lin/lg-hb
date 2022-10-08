@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .round{
+            position: relative;
+            width: 450px;
+            height: 450px;
+        }
+        .btn{
+            position:absolute;
+            top:50%;
+            left: 50%;
+            margin-top: -138px;
+            margin-left: -94px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="round">
+    <div class="box">
+        <img src="./imgs/turntable.png" alt="">
+    </div>
+    <div class="btn">
+        <img src="./imgs/pointer.png" alt="">
+    </div>
+</div>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var round=document.getElementsByClassName("round")[0];
+    var box=round.getElementsByClassName("box")[0].children[0];
+    var btn=round.getElementsByClassName("btn")[0];
+    let startAngel = 0
+    let startIsEight = true // 是8元
+    btn.onclick=function(){
+        var num=8;
+        let isEight = Math.random() <= 0.8
+        let gap = 360 / num
+        // 范围
+        let rotateAngel = startIsEight === isEight ? num * 360 : (isEight ? num * 360 - gap * 2 : num * 360 + gap  * 2)
+        rotateAngel = startAngel === 0 ? rotateAngel - gap / 2 : rotateAngel
+        box.style.transform="rotate("+rotateAngel +"deg)";
+        box.style.transition="5s";
+        setTimeout(() => {
+            startIsEight = isEight
+            res(rotateAngel)
+        }, 5000)
+    }
+    function res(){
+        // 更新
+        startAngel = 0
+        box.dataset.rotate=startAngel;
+        box.style.transform="rotate("+startAngel+"deg)";
+        box.style.transition="";
+    }
+
+</script>
+</body>
+</html>

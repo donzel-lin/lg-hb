@@ -631,3 +631,14 @@ Array.prototype.myForEach = function(fn) {
 arr.myForEach((item, index) => {
     console.log(item, index, '22222222222222')
 })
+
+
+// // a.js
+//  const name = 'alvin'
+// module.exports = {
+//     name
+// }
+// exorts.name = name
+// // b.js
+// const name = require('a.js')
+// define(['module1', 'module2'],function(module1, ) {})

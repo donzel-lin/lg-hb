@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/scrollList.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="box">
+    <img class="tips" src="./imgs/tips.png" alt="">
+    <div  class="table">
+        <div class="" id="eff">
+            <img width="330px" height="330px" src="https://bats.hdike.com/me5vs/m/_nuxt/static/superturntable/img_1.png" alt="">
+            <img class="stars"  width="307px" height="307px" src="https://bats.hdike.com/me5vs/m/_nuxt/static/superturntable/img_0.png" alt="">
+        </div>
+        <div  class="gift">
+            <ul  id="turnUl" style="transition: transform 5s ease 0s;">
+                <img  src="./imgs/inner.png" alt="" class="bg">
+            </ul>
+       </div>
+       <img id="arrow" src="https://bats.hdike.com/me5vs/m/_nuxt/static/img/super-arrow@2x.dadfbbda.png" alt="" class="arrow">
+    </div>
+    <div  class="lottery-consumption">每次抽奖需消耗：2000猫币</div>
+    <div  class="balance-gift-box"><div  class="balance-btn">余额：0</div><div  class="myGiftBtn">我的奖品</div></div>
+    <div  class="ruleDiv">
+        <div  class="title">
+            <img  src="data:image/png;base64,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" alt=""><span >活动规则</span><img  src="data:image/png;base64,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" alt="">
+        </div>
+        <div  class="desc">
+            <div  class="descTxt" style="white-space: pre-line;">
+                1、首次注册海豹APP并注册的用户可参与一次抽奖。
+                2、抽中奖品后需要保存截图后点击立即领取发送给在线客服领取。
+                3、海豹直播拥有本活动的最终解释权
+            </div>
+        </div>
+    </div>
+
+    <div class="list container">
+        <ul id="giftList" class="scroll-list">
+            <li class="gift-item">
+                <span>12222222222</span>
+                <span>******************</span>
+                <span>抽中获得了阿斯顿发斯蒂芬</span>
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="loginModal"
+            class="download-app-pop van-popup van-popup--center"
+            >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // 下载地址
+    const _appDownloadUlr = 'http://zhuoyixiaochengxu.cn/haibao_100.apk'
+    const _appDownloadUlrIOS = 'https://hainiu168.com/'
+    const _browserInfo = browserInfo()
+    const downloadUrl = !!_browserInfo.android ? _appDownloadUlr :_appDownloadUlrIOS
+
+
+    let isLogin = !!GetQueryString('token')
+    // let isLogin = Math.random() < 0.5
+    const arrowBtn = document.getElementById('arrow')
+
+    let startAngel = 0
+    let startIsEight = true // 是8元
+
+    function res(){
+        arrowBtn.style.transform="rotate(0deg)";
+        arrowBtn.style.transition="";
+    }
+    // 中间按钮
+    arrowBtn.onclick = function() {
+        if(!isLogin) {
+            console.log('提的登录')
+            $('#loginModal').modal()
+            return
+        }
+        // 抽奖
+        let  num = 8;
+        let isEight = Math.random() <= 0.8
+        let gap = 360 / num
+        // 范围
+        let rotateAngel = isEight ?  num * 360 : (num * 360 + gap * 2)
+        rotateAngel = startAngel === 0 ? rotateAngel - gap / 2 : rotateAngel
+        arrowBtn.style.transform="rotate("+rotateAngel +"deg)";
+        arrowBtn.style.transition="5s";
+        updateContent(isEight)
+        setTimeout(() => {
+            startIsEight = isEight
+            res(rotateAngel)
+            $('#exampleModal').modal()
+        }, 5500)
+    }
+    // 提示登录弹框
+    $('#loginModal').on('show.bs.modal',function (e) {
+        const children = `
+            <div class="tooltip-box">
+                <div  class="mainDiv">
+                    <i  class="close-btn van-icon van-icon-cross"><!----></i>
+                    <img  src="./imgs/logo.png" alt="">
+                    <div  class="desc">下载海豹直播app，即可免费抽大奖</div>
+                    <div  class="btnDiv">
+                        <a href="${downloadUrl}" target="_blank" class="download">去下载</a>
+                    </div>
+                </div>
+            </div>`
+        $(this).find('.modal-content').html(children)
+    })
+
+    // 抽奖后的弹框
+    function updateContent(isEight) {
+        const num = isEight ? 8 : 28
+        $('#exampleModal').on('show.bs.modal', function() {
+            const children = `
+                <div class="modal-body">
+                    <div  class="content-wrap">
+                        <span class="close-btn"></span>
+                        <img  src="./imgs/gold.png" alt="" class="gold">
+                        <div  class="name">获得现金${num}元</div>
+                        <a  href="https://tb.53kf.com/code/client/b8ccba789e8f30713194b500e84013f22/1" target="_blank" class="btn">立即领取</a>
+                    </div>
+                </div>
+            `
+            $(this).find('.modal-content').html(children)
+            $(this).find('.close-btn').click(function() {
+                console.log('121212')
+                $('#exampleModal').modal('hide')
+            })
+        })
+    }
+
+    // 获取url参数
+    function GetQueryString(name) {
+        const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        const r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    // 手机ios或android
+    function browserInfo () {
+        const u = navigator.userAgent
+        // const app = navigator.appVersion
+        return {
+            trident: u.indexOf('Trident') > -1,
+            presto: u.indexOf('Presto') > -1,
+            webKit: u.indexOf('AppleWebKit') > -1,
+            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/),
+            ios: !!u.match(/(i[^;]+;(U;)? CPU.+Mac OS X)/),
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1,
+            iPad: u.indexOf('iPad') > -1,
+            webApp: u.indexOf('Safari') == -1
+        }
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

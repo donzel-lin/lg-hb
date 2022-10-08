@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
+    <!-- <script src="./design-mode.js"></script> -->
+    <script src="./eventBus.js"></script>
+    <style>
+        html,body {
+            width: 100%;
+            height: 100%
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .login-box {
+            padding: 10px 20px;
+            position: fixed;
+            left: calc(50% - 150px);
+            top: calc(50% - 100px);
+            width: 300px;
+            height: 200px;
+            line-height: 30px;
+            border: 1px solid;
+        }
+        .content {
+            height: 120px;
+            width: 100%;
+        }
+        .header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .footer {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">点我</button>
+    <button id="btn2">发送</button>
+    <button id="btn3">结束</button>
+    <script>
+        // const instance = LoginModal.getInstance({})
+        // setTimeout(() => {
+        //     instance.openDialog()
+        // }, 3000)
+
+        const bus = new Bus()
+
+        function handle(params) {
+            console.log('触发事件', params)
+        }
+        $('#btn').click(function() {
+            bus.on('type1', handle)
+        })
+
+        $('#btn2').click(function() {
+            bus.emit('type1', { name: 'alvin'})
+        })
+
+
+        $('#btn3').click(function() {
+            bus.off('type1', handle)
+        })
+
+    </script>
+</body>
+</html>

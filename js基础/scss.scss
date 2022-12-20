@@ -1,0 +1,30 @@
+$color: #fff;
+
+.nav {
+    $width: 20px;
+    width: $width;
+    color: $color;
+}
+
+$theme-color: #0072dd!default;
+//通过选择器继承继承样式
+.error {
+    border: 1px solid red;
+    background-color: #fdd;
+  }
+.seriousError {
+    @extend .error;
+    border-width: 3px;
+}
+// 相当于
+.seriousError {
+    border: 1px solid red;
+    background-color: #fdd;
+    border-width: 3px;
+}
+
+$name: foo;
+$attr: border;
+p.#{$name} {
+  #{$attr}-color: blue;
+}
